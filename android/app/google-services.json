@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "729966849188",
+    "project_id": "craft-comfort-b11a0",
+    "storage_bucket": "craft-comfort-b11a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729966849188:android:4c4f0ef136529f90e50a31",
+        "android_client_info": {
+          "package_name": "com.craftcomfort.arfurnitureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729966849188-tisbgtt05a1v0bahgv99kflb9tnaqa89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMl1JMbZBx46NOeRmlJVdRho2cq9hhMHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729966849188-tisbgtt05a1v0bahgv99kflb9tnaqa89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
