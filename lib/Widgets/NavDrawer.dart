@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_furniture_app/Controller/AuthController.dart';
 import 'package:ar_furniture_app/Views/Admin_Panel/AdminPanel.dart';
-import 'package:ar_furniture_app/Views/MyOrders.dart';
 //import 'package:ar_furniture_app/Views/Admin_Panel/UploadData.dart';
 import 'package:ar_furniture_app/Views/profile_screen.dart';
 import 'package:get/get.dart';
@@ -39,14 +38,6 @@ class NavDrawer extends StatelessWidget {
               Get.to(()=> const ProfileScreen());
             },
           ),
-
-          ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('My Orders'),
-            onTap: () async {
-              Get.to(() => const MyOrders());
-            },
-          ),
           Builder(builder: (context) {
             return ListTile(
               leading: Get.isDarkMode
@@ -56,11 +47,6 @@ class NavDrawer extends StatelessWidget {
               trailing: Container(height: 30, width: 40, child: themeToggle()),
             );
           }),
-
-
-
-
-
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
