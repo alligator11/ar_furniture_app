@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "729966849188-1nn3cl5uovl7behamn709qqa7dqk60va.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.craftcomfort.arfurnitureapp",
+            "certificate_hash": "7bc5699a64796821886e1c8963483121881ca880"
+          }
+        },
+        {
           "client_id": "729966849188-rgg1nphaof2ljarrhbqs9gndlaii6tt8.apps.googleusercontent.com",
           "client_type": 3
         }
