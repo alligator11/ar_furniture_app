@@ -169,7 +169,7 @@ class _SignUpState extends State<SignUp> {
                         DividerHeading(heading: 'OR'),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Text('Sign In with',style: TextStyle(fontSize: 18),),
+                          child: Text('Sign in with',style: TextStyle(fontSize: 18),),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
