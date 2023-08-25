@@ -40,10 +40,11 @@ class _UploadDataState extends State<UploadData> {
   void initState() {
     super.initState();
     index = args[0];
+    debugPrint(product.categories.value.length.toString());
     for (int i = 0; i < product.categories.value.length; i++) {
       cats.add(product.categories.value[i]['Category']);
     }
-    print(cats);
+    debugPrint(cats.toString());
     if (isEditing) {
       name = args[1];
       price = args[2];
@@ -99,27 +100,24 @@ class _UploadDataState extends State<UploadData> {
                   },
                 ),
                 // DropdownButton<String>(
-                //
-                //   focusColor: Colors.white,
-                //   value: product.category.text,
-                //   //elevation: 5,
-                //
-                //
-                //   items: cats
-                //       .map<DropdownMenuItem<String>>(( value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(
-                //         value,
-                //         style: const  TextStyle(fontSize: 18),
-                //       ),
-                //     );
-                //   }).toList(),
-                //   onChanged: (String? value) {
-                //     setState(() {
-                //       product.category.text = value.toString();
-                //     });
-                //   },
+                //    focusColor: Colors.white,
+                //    value: product.category.text,
+                //    //elevation: 5,
+                //    items: cats
+                //        .map<DropdownMenuItem<String>>(( value) {
+                //      return DropdownMenuItem<String>(
+                //        value: value,
+                //        child: Text(
+                //          value,
+                //          style: const  TextStyle(fontSize: 18),
+                //        ),
+                //      );
+                //    }).toList(),
+                //    onChanged: (String? value) {
+                //      setState(() {
+                //    product.category.text = value.toString();
+                //      });
+                //    },
                 // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
