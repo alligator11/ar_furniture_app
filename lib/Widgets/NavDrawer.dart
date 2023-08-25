@@ -56,7 +56,7 @@ class NavDrawer extends StatelessWidget {
           ),
           Builder(
               builder: (context) {
-                if(FirebaseAuth.instance.currentUser!.email.toString()=='shayaniqbal515@gmail.com'){
+                if(FirebaseAuth.instance.currentUser!.email.toString()=='we3.craftcomfort@gmail.com'){
                   return ListTile(
                     leading: Icon(Icons.person_outlined),
                     title: Text('Admin Panel'),
