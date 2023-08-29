@@ -5,6 +5,7 @@ import 'package:ar_furniture_app/Widgets/ModelView.dart';
 import 'package:get/get.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
+//import 'CheckOut.dart';
 import 'cartPage.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -162,8 +163,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                  borderRadius: BorderRadius.only(
                                    bottomLeft: Radius.circular(20.0),
                                      topLeft: Radius.circular(20.0),
-                                     topRight: Radius.circular(20.0),
-                                 bottomRight: Radius.circular(20.0)),
+                                     topRight: Radius.circular(40.0)),
                                  side: BorderSide(color: Colors.grey, width: 0.7),
                                ),
                                elevation: 5,
@@ -172,6 +172,32 @@ class _ProductDetailsState extends State<ProductDetails> {
                              ),
                            ),
                          ),
+                         // InkWell(
+                         //   onTap: (){
+                         //     cart.buyNow(product.prodName.value,
+                         //         double.parse(product.prodPrice.value),
+                         //         product.prodModelUrl.value,product.prodImageUrl.value);
+                         //          print(cart.buyList.value);
+                         //     Get.to(()=>const Checkout(),arguments: [buyNow,product.prodPrice.toString()]);
+                         //   },
+                         //   child: Container(
+                         //     height: 60,
+                         //     width: 110,
+                         //     child: const Card(
+                         //       color: Colors.green,
+                         //       shape:  RoundedRectangleBorder(
+                         //         borderRadius:  BorderRadius.only(
+                         //             bottomLeft:  Radius.circular(40.0),
+                         //             bottomRight: Radius.circular(20.0),
+                         //             topRight: Radius.circular(20.0)),
+                         //         side: BorderSide(color: Colors.grey, width: 0.7),
+                         //       ),
+                         //       elevation: 5,
+                         //       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                         //       child: const Center(child: Text('BUY IT NOW!!')),
+                         //     ),
+                         //   ),
+                         // ),
                        ],
                      ),
                    ),

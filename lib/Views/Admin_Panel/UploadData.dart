@@ -40,7 +40,7 @@ class _UploadDataState extends State<UploadData> {
   void initState() {
     super.initState();
     index = args[0];
-    debugPrint(product.categories.value.length.toString());
+    debugPrint(product.products.value.length.toString());
     for (int i = 0; i < product.categories.value.length; i++) {
       cats.add(product.categories.value[i]['Category']);
     }
@@ -295,11 +295,19 @@ class _UploadDataState extends State<UploadData> {
                               MaterialStateProperty.all<Color>(Colors.red),
                         ),
                         onPressed: () async {
-                          await FirebaseFirestore.instance
-                              .collection('products')
-                              .doc(productId)
-                              .delete();
-                          Get.off(ProductsAdmin());
+                          // await FirebaseFirestore.instance
+                          //     .collection('products')
+                          //     .doc(productId)
+                          //     .delete();
+                          // Get.off(ProductsAdmin());
+                          String videoPath = 'out_13.glb'; // Replace with the actual video path in Firebase Storage
+
+                          FirebaseStorage storage = FirebaseStorage.instance;
+                          Reference videoRef = storage.ref().child(videoPath);
+
+                          String downloadUrl = await videoRef.getDownloadURL();
+
+                          print('Video Download URL:$downloadUrl');
                         },
                         child: Text('Delete'));
                   } else {
@@ -351,6 +359,7 @@ class _UploadDataState extends State<UploadData> {
                       setState(() {
                         image1 = null;
                       });
+
                     },
                     child: const Align(
                         alignment: Alignment.topRight,

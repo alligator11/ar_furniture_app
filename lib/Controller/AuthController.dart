@@ -70,6 +70,7 @@ class AuthController extends GetxController {
     try {
       await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+          Get.to(()=>MainPage());
     }
     on FirebaseAuthException catch (e) {
       Get.snackbar('Error', '${e.message}', duration: Duration(seconds: 2),
