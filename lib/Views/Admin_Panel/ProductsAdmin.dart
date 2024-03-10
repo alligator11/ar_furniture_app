@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ar_furniture_app/Views/Admin_Panel/UploadData.dart';
+// import 'package:ar_furniture_app/Views/Admin_Panel/UploadData.dart';
 import 'package:ar_furniture_app/Widgets/ModelView.dart';
 import 'package:get/get.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
@@ -20,11 +20,11 @@ class _ProductsAdminState extends State<ProductsAdmin> {
       appBar: AppBar(
         title: const Text('Products'),
         centerTitle: true,
-        actions: [
-          IconButton(onPressed: (){
-            Get.to(()=>const UploadData(),arguments: ['null']);
-          }, icon: const Icon(Icons.add_circle))
-        ],
+        // actions: [
+        //   IconButton(onPressed: (){
+        //     Get.to(()=>const UploadData(),arguments: ['null']);
+        //   }, icon: const Icon(Icons.add_circle))
+        // ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('products').snapshots(),
@@ -37,9 +37,9 @@ class _ProductsAdminState extends State<ProductsAdmin> {
               itemBuilder: (context, index) {
                 DocumentSnapshot doc = snapshot.data!.docs[index];
                 return InkWell(
-                  onTap: (){
-                    Get.to(()=>UploadData(),arguments: [index,doc['name'],doc['price'],doc['productId'],doc['modelUrl'],doc['category'],doc['description'],doc['imageUrl']]);
-                  },
+                  // onTap: (){
+                  //   Get.to(()=>UploadData(),arguments: [index,doc['name'],doc['price'],doc['productId'],doc['modelUrl'],doc['category'],doc['description'],doc['imageUrl']]);
+                  // },
                   child: Card(
                     elevation: 8,shadowColor: Get.isDarkMode?Colors.black45:Colors.black45,margin: EdgeInsets.all(6),
                     shape:  OutlineInputBorder(
