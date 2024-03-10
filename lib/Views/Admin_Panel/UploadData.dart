@@ -29,8 +29,8 @@ class _UploadDataState extends State<UploadData> {
   var category;
   var productId;
   var description;
-  RxBool addCat=false.obs;
-  RxBool selCat=false.obs;
+  RxBool addCat = false.obs;
+  RxBool selCat = false.obs;
   List cats = [];
   String? imageUrl;
 
@@ -52,7 +52,7 @@ class _UploadDataState extends State<UploadData> {
       modelUrl = args[4];
       category = args[5];
       description = args[6];
-      imageUrl=args[7];
+      imageUrl = args[7];
       product.name.text = name;
       product.category.text = category;
       product.modelUrl.text = modelUrl;
@@ -63,7 +63,7 @@ class _UploadDataState extends State<UploadData> {
       product.category.text = cats[0].toString();
       product.modelUrl.text = '';
       product.price.text = '';
-      imageUrl='';
+      imageUrl = '';
       product.description.text = '';
     }
   }
@@ -177,36 +177,38 @@ class _UploadDataState extends State<UploadData> {
                           }
                         }),
                       ),
-                      Builder(
-                        builder: (context) {
-                          if(addCat.value==false){
+                      Builder(builder: (context) {
+                        if (addCat.value == false) {
                           return IconButton(
                               onPressed: () {
-                                setState((){
-                                addCat.value = true;
-                                selCat.value=false;
-                                print(addCat);});
+                                setState(() {
+                                  addCat.value = true;
+                                  selCat.value = false;
+                                  print(addCat);
+                                });
                               },
                               icon: Icon(
                                 Icons.add_circle,
                                 size: 28,
                               ));
-                        }
-                          else if(selCat.value==false) {
+                        } else if (selCat.value == false) {
                           return IconButton(
                               onPressed: () {
-                                setState((){
+                                setState(() {
                                   selCat.value = true;
-                                  addCat.value=false;
-                                  print(selCat);});
+                                  addCat.value = false;
+                                  print(selCat);
+                                });
                               },
                               icon: Icon(
                                 Icons.arrow_drop_down,
                                 size: 28,
-                              ));}
-                          else{return Text('');};
+                              ));
+                        } else {
+                          return Text('');
                         }
-                      )
+                        ;
+                      })
                     ],
                   ),
                 ),
@@ -263,7 +265,7 @@ class _UploadDataState extends State<UploadData> {
                           'category': product.category.text,
                           'price': product.price.text,
                           'productId': productId,
-                          'imageUrl':imageUrl,
+                          'imageUrl': imageUrl,
                         };
                         await FirebaseFirestore.instance
                             .collection('products')
@@ -300,7 +302,8 @@ class _UploadDataState extends State<UploadData> {
                           //     .doc(productId)
                           //     .delete();
                           // Get.off(ProductsAdmin());
-                          String videoPath = 'out_13.glb'; // Replace with the actual video path in Firebase Storage
+                          String videoPath =
+                              'out_13.glb'; // Replace with the actual video path in Firebase Storage
 
                           FirebaseStorage storage = FirebaseStorage.instance;
                           Reference videoRef = storage.ref().child(videoPath);
@@ -325,74 +328,76 @@ class _UploadDataState extends State<UploadData> {
   Widget _buildImagePicker1() {
     return InkWell(
       onTap: () async {
-        var pickedFile = await imagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20);
+        var pickedFile = await imagePicker.pickImage(
+            source: ImageSource.gallery, imageQuality: 20);
         setState(() {
           image1 = File(pickedFile!.path);
         });
       },
-      child: imageUrl!.isEmpty? Container(
-        width: 120,
-        height: 120,
-        decoration: image1 == null
-            ? BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
-              )
-            : BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-        child: image1 != null
-            ? Stack(
-                children: [
-                  Center(
-                    child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Image.file(
-                        image1!,
-                        fit: BoxFit.cover,
+      child: imageUrl!.isEmpty
+          ? Container(
+              width: 120,
+              height: 120,
+              decoration: image1 == null
+                  ? BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  : BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+              child: image1 != null
+                  ? Stack(
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.file(
+                              image1!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              image1 = null;
+                            });
+                          },
+                          child: const Align(
+                              alignment: Alignment.topRight,
+                              child: Icon(Icons.cancel)),
+                        ),
+                      ],
+                    )
+                  : const Center(
+                      child: Icon(
+                        Icons.add,
+                        size: 30,
+                        color: Colors.grey,
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        image1 = null;
-                      });
-
-                    },
-                    child: const Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.cancel)),
-                  ),
-                ],
-              )
-            : const Center(
-                child: Icon(
-                  Icons.add,
-                  size: 30,
-                  color: Colors.grey,
-                ),
-              ),
-      ): SizedBox(
-        height: 120,
-        width: 120,
-        child: Image.network(imageUrl!),
-      ),
+            )
+          : SizedBox(
+              height: 120,
+              width: 120,
+              child: Image.network(imageUrl!),
+            ),
     );
   }
+
   Future uploadImagesAndGetDownloadLink() async {
     try {
       if (image1 != null) {
-        var reference1 =
-        FirebaseStorage.instance.ref('Images/$image1');
+        var reference1 = FirebaseStorage.instance.ref('Images/$image1');
         await reference1.putFile(image1!);
         String download1 = await reference1.getDownloadURL();
         if (kDebugMode) {
           print('Image1 DOWNLOAD URL:$download1');
         }
-        setState((){
-          imageUrl=download1;
+        setState(() {
+          imageUrl = download1;
         });
       }
     } on FirebaseException catch (e) {
