@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
@@ -6,16 +8,33 @@ import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vector_math/vector_math_64.dart';
+import 'ViewRecommendations.dart';
 
 class LocalAndWebObjectsView extends StatefulWidget {
   const LocalAndWebObjectsView({Key? key}) : super(key: key);
-
   @override
   State<LocalAndWebObjectsView> createState() => _LocalAndWebObjectsViewState();
 }
 
 class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
+  File? image;
+  final picker = ImagePicker();
+
+  Future getImage() async{
+    final pickerImage = await picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if(pickerImage != null){
+        image = File(pickerImage.path);
+      }
+      else{
+        print("no image selected");
+      }
+    });
+  }
+
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
 
@@ -42,6 +61,8 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Stack(
+              children:[
             SizedBox(
               height: MediaQuery.of(context).size.height * .8,
               child: ClipRRect(
@@ -51,6 +72,30 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
                 ),
               ),
             ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: getImage,
+                          child: const Text("Upload room pictures")),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ViewRecommendations(image)));
+                          },
+                          child: const Text("View ")),
+                    ),
+                  ],
+                ),
+              ]
+              ),
             Row(
               children: [
                 // Expanded(
@@ -123,3 +168,4 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
     }
   }
 }
+

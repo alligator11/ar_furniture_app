@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ar_furniture_app/Controller/CartController.dart';
 import 'package:ar_furniture_app/Controller/ProductController.dart';
-import 'package:ar_furniture_app/Widgets/ModelView.dart';
+// import 'package:ar_furniture_app/Widgets/ModelView.dart';
 import 'package:get/get.dart';
-import 'package:model_viewer_plus/model_viewer_plus.dart';
+// import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 import 'package:ar_furniture_app/Views/LocalAndWebObjectsView.dart';
 

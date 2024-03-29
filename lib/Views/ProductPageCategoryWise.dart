@@ -4,7 +4,7 @@ import 'package:ar_furniture_app/Controller/ProductController.dart';
 import 'package:ar_furniture_app/Views/ProductDetailsPage.dart';
 import 'package:ar_furniture_app/Views/cartPage.dart';
 import 'package:ar_furniture_app/Widgets/DividerHeading.dart';
-import 'package:ar_furniture_app/Widgets/ProductCard.dart';
+// import 'package:ar_furniture_app/Widgets/ProductCard.dart';
 import 'package:get/get.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
