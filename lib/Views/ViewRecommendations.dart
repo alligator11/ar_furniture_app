@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewRecommendations extends StatefulWidget {
   final List<dynamic> responseData;
@@ -20,7 +21,17 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
   void initState() {
     super.initState();
     getAverageRating();
-
+    _loadPreferences();
+  }
+  String selectedAge = '10-30';
+  String selectedGender = 'Male';
+  late SharedPreferences _prefs;
+  Future<void> _loadPreferences() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedAge = _prefs.getString('selectedAge') ?? '10-30';
+      selectedGender = _prefs.getString('selectedGender') ?? 'Male';
+    });
   }
 
   Future<double> getAverageRating() async {
@@ -100,6 +111,8 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
       await FirebaseFirestore.instance.collection('ratings').add({
         'rating': _rating,
         'timestamp': FieldValue.serverTimestamp(),
+        'selectedAge': selectedAge,
+        'selectedGender': selectedGender
       });
       print('Rating submitted successfully!');
     } catch (e) {
