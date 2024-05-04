@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ar_furniture_app/Bindings/binding.dart';
 import 'package:get/get.dart';
+import 'Views/result_analysis.dart';
 
 import 'Views/Login.dart';
 import 'Widgets/Constants.dart';

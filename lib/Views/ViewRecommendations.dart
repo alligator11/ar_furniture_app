@@ -1,3 +1,4 @@
+import 'package:ar_furniture_app/Views/result_analysis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -237,7 +238,14 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
               _showRatingDialog();
             },
                 child: Text("Rate")),
-            Text("Average rating: $avg"),
+            ElevatedButton(onPressed:
+                (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BarChartScreen()),
+                  );
+            },
+                child: Text("See Ratings")),
             // Assuming avg is a variable holding the average rating
           ],
         )
