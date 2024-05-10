@@ -36,24 +36,41 @@ class _BarChartScreenState extends State<BarChartScreen> {
       '50+': 0,
     };
 
+    // Initialize counters for each category
+    Map<String, int> genderCounts = {'Male': 0, 'Female': 0, 'Others': 0};
+    Map<String, int> ageCategoryCounts = {'10-30': 0, '31-50': 0, '50+': 0};
+
     for (var doc in querySnapshot.docs) {
-      var rating = doc['rating'];
       var selectedGender = doc['selectedGender'];
       var selectedAge = doc['selectedAge'];
 
-      // Use null-aware operator and provide a default value
-      genderAverages[selectedGender] = (genderAverages[selectedGender]?? 0) + rating;
-      ageCategoryAverages[selectedAge] = (ageCategoryAverages[selectedAge]?? 0) + rating;
+      // Update category counts
+      if (genderCounts.containsKey(selectedGender)) {
+        genderCounts[selectedGender] = genderCounts[selectedGender]! + 1;
+      }
+      if (ageCategoryCounts.containsKey(selectedAge)) {
+        ageCategoryCounts[selectedAge] = ageCategoryCounts[selectedAge]! + 1;
+      }
+
+      var rating = doc['rating'];
+
+      // Update category averages
+      genderAverages[selectedGender] = (genderAverages[selectedGender] ?? 0) + rating;
+      ageCategoryAverages[selectedAge] = (ageCategoryAverages[selectedAge] ?? 0) + rating;
     }
 
+// Calculate category averages
     for (var gender in genderAverages.keys) {
-      // Ensure the value is non-null before performing division
-      genderAverages[gender] = (genderAverages[gender]?? 0) / querySnapshot.docs.length;
+      if (genderCounts[gender] != null && genderCounts[gender]! > 0) {
+        genderAverages[gender] = (genderAverages[gender] ?? 0) / genderCounts[gender]!;
+      }
     }
     for (var ageCategory in ageCategoryAverages.keys) {
-      // Ensure the value is non-null before performing division
-      ageCategoryAverages[ageCategory] = (ageCategoryAverages[ageCategory]?? 0) / querySnapshot.docs.length;
+      if (ageCategoryCounts[ageCategory] != null && ageCategoryCounts[ageCategory]! > 0) {
+        ageCategoryAverages[ageCategory] = (ageCategoryAverages[ageCategory] ?? 0) / ageCategoryCounts[ageCategory]!;
+      }
     }
+
 
     // Print the average values for debugging
     print('Gender Averages: $genderAverages');

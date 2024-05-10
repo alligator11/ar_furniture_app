@@ -91,9 +91,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LocalAndWebObjectsView()));
+                                      builder: (context) => LocalAndWebObjectsView(prodModelUrl: product.prodModelUrl.value)));
                             },
-                            child: const Text("Local / Web Objects")),
+                            child: const Text("View in AR")),
                       ],
                     ),
                   )
@@ -131,44 +131,45 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, left: 20.0, right: 20.0, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Desciption:',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.32,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Text('${product.prodDesc}'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0, bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Description:',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 10),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.32,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${product.prodDesc}',
+                                  textAlign: TextAlign.left, // Ensure left alignment
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: () {
+                            TextButton(
+                              onPressed: () {
                                 var contain = cart.cartList.where((element) =>
-                                    element['modelUrl'] ==
+                                element['modelUrl'] ==
                                     "${product.prodModelUrl.value}");
                                 if (contain.isNotEmpty) {
                                   Get.snackbar("Can't add item",
@@ -190,55 +191,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       snackPosition: SnackPosition.BOTTOM);
                                 }
                               },
-                              child: Container(
-                                height: 60,
-                                width: 110,
-                                child: const Card(
-                                  color: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(20.0),
-                                        topLeft: Radius.circular(20.0),
-                                        topRight: Radius.circular(40.0)),
-                                    side: BorderSide(
-                                        color: Colors.grey, width: 0.7),
-                                  ),
-                                  elevation: 5,
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 10),
-                                  child: Center(child: Text('ADD TO CART')),
-                                ),
-                              ),
+                              child: Text('ADD TO CART'),
                             ),
-                            // InkWell(
-                            //   onTap: (){
-                            //     cart.buyNow(product.prodName.value,
-                            //         double.parse(product.prodPrice.value),
-                            //         product.prodModelUrl.value,product.prodImageUrl.value);
-                            //          print(cart.buyList.value);
-                            //     Get.to(()=>const Checkout(),arguments: [buyNow,product.prodPrice.toString()]);
-                            //   },
-                            //   child: Container(
-                            //     height: 60,
-                            //     width: 110,
-                            //     child: const Card(
-                            //       color: Colors.green,
-                            //       shape:  RoundedRectangleBorder(
-                            //         borderRadius:  BorderRadius.only(
-                            //             bottomLeft:  Radius.circular(40.0),
-                            //             bottomRight: Radius.circular(20.0),
-                            //             topRight: Radius.circular(20.0)),
-                            //         side: BorderSide(color: Colors.grey, width: 0.7),
-                            //       ),
-                            //       elevation: 5,
-                            //       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                            //       child: const Center(child: Text('BUY IT NOW!!')),
-                            //     ),
-                            //   ),
-                            // ),
+                            // Add your commented TextButton code here
                           ],
                         ),
                       ),
+
                     ],
                   ),
                 ),

@@ -43,8 +43,12 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
       await FirebaseFirestore.instance.collection('ratings').get();
 
       for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-        double rating = doc.get('rating');
-        ratings.add(rating);
+        dynamic ratingData = doc.get('rating');
+        if (ratingData is double) {
+          ratings.add(ratingData);
+        } else if (ratingData is int) {
+          ratings.add(ratingData.toDouble()); // Convert integer to double
+        }
       }
 
       if (ratings.isNotEmpty) {
@@ -56,13 +60,14 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
         print(average);
         return average;
       } else {
-        return 0.0;
+        return 0.0; // Or handle empty ratings list accordingly
       }
     } catch (e) {
       print('Error getting average rating: $e');
       return 0.0;
     }
   }
+
 
   void _showRatingDialog() {
     showDialog(
@@ -233,19 +238,44 @@ class _ViewRecommendationsState extends State<ViewRecommendations> {
                 },
               ),
             ),
-            ElevatedButton(onPressed:
-            (){
-              _showRatingDialog();
-            },
-                child: Text("Rate")),
-            ElevatedButton(onPressed:
-                (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BarChartScreen()),
-                  );
-            },
-                child: Text("See Ratings")),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6.0), // Adjust vertical margin as needed
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _showRatingDialog();
+                        },
+                        child: Text("Rate"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BarChartScreen()),
+                          );
+                        },
+                        child: Text("View Chart"),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0), // Adjust vertical margin as needed
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center, // Align center within the row
+                    children: [
+                      Text("Average rating: $avg"),
+                    ],
+                  ),
+                ),
+              ],
+            )
+
             // Assuming avg is a variable holding the average rating
           ],
         )

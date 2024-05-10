@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/node_types.dart';
@@ -15,14 +14,24 @@ import 'ViewRecommendations.dart';
 import 'package:http/http.dart' as http;
 
 class LocalAndWebObjectsView extends StatefulWidget {
-  const LocalAndWebObjectsView({Key? key}) : super(key: key);
+  final String prodModelUrl;
+
+  const LocalAndWebObjectsView({Key? key, required this.prodModelUrl}) : super(key: key);
+
   @override
   State<LocalAndWebObjectsView> createState() => _LocalAndWebObjectsViewState();
 }
 
 class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
+  late String modelUrl;
   XFile? image;
   final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    modelUrl = widget.prodModelUrl;
+  }
 
   Future getImage() async {
     final pickerImage = await picker.pickImage(source: ImageSource.camera);
@@ -214,8 +223,7 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
     } else {
       var newNode = ARNode(
           type: NodeType.webGLB,
-          uri:
-          "https://firebasestorage.googleapis.com/v0/b/craft-comfort-b11a0.appspot.com/o/ch09.glb?alt=media&token=648fdb2f-9810-4129-9145-332a3ad3836d",
+          uri: modelUrl,
           scale: Vector3(0.2, 0.2, 0.2));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;

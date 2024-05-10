@@ -31,37 +31,37 @@ class _MainPageState extends State<MainPage> {
   CartController cart = Get.find();
   List<dynamic> responseData = [];
 
-  Future<void> sendDataToApi(String furniture, int user) async {
-    print('Sending HTTP request...');
-    // API endpoint URL
-    final apiUrl = 'https://color-recommendation-api.onrender.com/hybrid';
-
-    // Create multipart request
-    var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-
-    request.fields['furniture'] = furniture;
-    request.fields['user_id'] = user.toString();
-
-    print(request.fields);
-    // Send request
-    http.StreamedResponse response = await request.send();
-
-    // Handle response
-    if (response.statusCode == 200) {
-      final responseBody = await response.stream.bytesToString();
-      responseData = jsonDecode(responseBody);
-      print(responseData);
-    }
-    else {
-      print('Error: ${response.reasonPhrase}');
-    }
-  }
+  // Future<void> sendDataToApi(String furniture, int user) async {
+  //   print('Sending HTTP request...');
+  //   // API endpoint URL
+  //   final apiUrl = 'https://color-recommendation-api.onrender.com/hybrid';
+  //
+  //   // Create multipart request
+  //   var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
+  //
+  //   request.fields['furniture'] = furniture;
+  //   request.fields['user_id'] = user.toString();
+  //
+  //   print(request.fields);
+  //   // Send request
+  //   http.StreamedResponse response = await request.send();
+  //
+  //   // Handle response
+  //   if (response.statusCode == 200) {
+  //     final responseBody = await response.stream.bytesToString();
+  //     responseData = jsonDecode(responseBody);
+  //     print(responseData);
+  //   }
+  //   else {
+  //     print('Error: ${response.reasonPhrase}');
+  //   }
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    sendDataToApi("so01 so17", 0);
+    // sendDataToApi("so01 so17", 0);
   }
   // initializeFirebase() async{
   //   FirebaseApp app=await Firebase.initializeApp();
@@ -96,20 +96,20 @@ class _MainPageState extends State<MainPage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          Future.delayed(Duration(seconds: 2), () async {
-            await product.catGet();
-
-            print(product.categories);
-          });
+          // Future.delayed(Duration(seconds: 2), () async {
+          //   await product.catGet();
+          //
+          //   print(product.categories);
+          // });
         },
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SmallerDividerHeading(
-                heading: 'Featured Products',
-              ),
+              // SmallerDividerHeading(
+              //   heading: 'Featured Products',
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Obx(() => ListView.builder(
